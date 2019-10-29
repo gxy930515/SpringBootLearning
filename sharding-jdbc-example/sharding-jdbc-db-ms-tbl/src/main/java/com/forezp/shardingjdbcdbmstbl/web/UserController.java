@@ -2,6 +2,7 @@ package com.forezp.shardingjdbcdbmstbl.web;
 
 
 import com.forezp.shardingjdbcdbmstbl.entity.User;
+import com.forezp.shardingjdbcdbmstbl.entity.UserInfo;
 import com.forezp.shardingjdbcdbmstbl.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +28,20 @@ public class UserController {
         return list;
     }
 
+    @GetMapping("/userInfos")
+    public Object listinfo() {
+        List<UserInfo> list= userService.listInfo();
+        //Collections.sort(list);
+        return list;
+    }
+
+    @GetMapping("/aaa")
+    public Object aaa() {
+        //Collections.sort(list);
+        userService.addUserInfoandUser();
+        return 0    ;
+    }
+
     @GetMapping("/add")
     public Object add() {
 
@@ -41,6 +56,25 @@ public class UserController {
         return "ok";
     }
 
+
+    @GetMapping("/addUserInfo")
+    public Object addUserInfo() {
+        for (int i=1;i<10;i++) {
+            UserInfo userInfo = new UserInfo();
+            userInfo.setId(i);
+            userInfo.setAge(i);
+            userInfo.setName("Tom"+i);
+            userService.addUserInfo(userInfo);
+        }
+        return "ok";
+    }
+
+
+    @GetMapping("/addBash")
+    public Object addBash() {
+        userService.addUserBash();
+        return "ok";
+    }
     @GetMapping("/delete")
     public Object delete() {
     userService.deleteAll();
